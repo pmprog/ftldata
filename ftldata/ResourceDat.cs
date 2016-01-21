@@ -15,7 +15,7 @@ namespace ftldata
 	public class ResourceDat
 	{
 
-		public List<FileDescriptor> Files;
+		public List<FileDescriptor> Files = new List<FileDescriptor>();
 
 		public ResourceDat()
 		{
@@ -51,9 +51,10 @@ namespace ftldata
 			{
 				if( offsetworking == 0 )
 				{
-					newdescriptor = new FileDescriptor();
-					newdescriptor.Filename = "";
-					newdescriptor.Length = -1;
+					//newdescriptor = new FileDescriptor();
+					//newdescriptor.Filename = "";
+					//newdescriptor.Length = -1;
+					newdescriptor = null;
 				}
 				else
 				{
@@ -65,7 +66,11 @@ namespace ftldata
 					newdescriptor.Filename = System.Text.ASCIIEncoding.ASCII.GetString( stringbytes );
 					newdescriptor.Data = filereader.ReadBytes( newdescriptor.Length );
 				}
-				Files.Add( newdescriptor );
+
+				if (newdescriptor != null)
+				{
+					Files.Add(newdescriptor);
+				}
 			}
 	
 			filereader.Close();

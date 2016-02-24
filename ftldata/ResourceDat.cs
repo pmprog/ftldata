@@ -41,7 +41,7 @@ namespace ftldata
 			filereader = new BinaryReader( filehandle );
 	
 			filecount = filereader.ReadInt32();
-			for( UInt32 fileindex = 1; fileindex < filecount; fileindex++ )
+			for( UInt32 fileindex = 1; fileindex <= filecount; fileindex++ )
 			{
 				offsetcurrent = filereader.ReadInt32();
 				offsetlist.Add( offsetcurrent );

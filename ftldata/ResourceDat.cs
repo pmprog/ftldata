@@ -72,7 +72,8 @@ namespace ftldata
 					Files.Add(newdescriptor);
 				}
 			}
-	
+
+			Console.WriteLine("Load: " + Filename + " (Size " + filehandle.Length + ")");
 			filereader.Close();
 			filehandle.Close();
 		}
@@ -114,7 +115,9 @@ namespace ftldata
 					filewriter.Write( descriptor.Data );
 				}
 			}
-			
+
+			filewriter.Flush();
+			Console.WriteLine("Save: " + Filename + " (Size " + filehandle.Length + ")");
 			filewriter.Close();
 			filehandle.Close();
 		}

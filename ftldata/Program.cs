@@ -46,6 +46,7 @@ namespace ftldata
 									{
 										System.IO.Directory.CreateDirectory(filedir);
 									}
+									Console.WriteLine("Extracting " + fd.Filename + " to " + filename);
 									System.IO.File.WriteAllBytes(filename, fd.Data);
 								}
 							}
@@ -65,6 +66,7 @@ namespace ftldata
 								{
 									System.IO.Directory.CreateDirectory(filedir);
 								}
+								Console.WriteLine("Extracting " + fd.Filename + " to " + filename);
 								System.IO.File.WriteAllBytes(filename, fd.Data);
 							}
 						}
@@ -79,13 +81,22 @@ namespace ftldata
 						}
 						else
 						{
-							datafile = new ResourceDat(args[0]);
+							bool foundfile = false;
 							foreach (FileDescriptor fd in datafile.Files)
 							{
 								if (fd.Length >= 0 && fd.Filename == args[2])
 								{
+									foundfile = true;
+									Console.WriteLine("Found file " + fd.Filename + " (Size " + fd.Length.ToString() + ")");
 									fd.Data = System.IO.File.ReadAllBytes(args[3]);
+									fd.Length = fd.Data.Length;
+									Console.WriteLine(" New Size " + fd.Length.ToString());
+									break;
 								}
+							}
+							if( !foundfile )
+							{
+								Console.WriteLine("Did not find file " + args[2]);
 							}
 						}
 						datafile.SaveResourceFile(args[0]);
